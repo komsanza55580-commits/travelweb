@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazing Thailand - 1 ภาค 1 จังหวัด ไม่ไปไม่รู้</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Fredoka for cute titles & Prompt / Sarabun for readability) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastelBg: '#FFF5F7',      // สีพื้นหลังชมพูครีมอ่อนสุดๆ
+                        pastelLight: '#FDE2E4',   // ชมพูพาสเทลอ่อนหวาน
+                        pastelSoft: '#FFCAD4',    // ชมพูนมสดใส
+                        pastelPeach: '#F4ACB7',   // พีชโรสหวานๆ
+                        pastelRose: '#FFB7C5',    // ชมพูกุหลาบสดใส
+                        pastelDeep: '#D87093',    // ชมพูเข้มสำหรับข้อความไฮไลท์
+                        pastelPlum: '#9C4668',    // ชมพูอมม่วงเข้มสำหรับปุ่มและส่วนหัว
+                        pinkBorder: '#F9BEC7',
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                        cute: ['Fredoka', 'Prompt', 'sans-serif'],
+                        body: ['Sarabun', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'cute': '0 8px 25px -5px rgba(255, 183, 197, 0.4), 0 8px 10px -6px rgba(255, 183, 197, 0.2)',
+                        'pink-glow': '0 0 20px rgba(254, 202, 212, 0.6)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Sweet Styles */
+        body {
+            background-color: #FFF5F7;
+            background-image: radial-gradient(#FFCAD4 0.75px, transparent 0.75px), radial-gradient(#FFCAD4 0.75px, #FFF5F7 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(255, 202, 212, 0.5) 0%, rgba(156, 70, 104, 0.85) 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            border: 2px solid #F9BEC7;
+        }
+        .glass-pink {
+            background: rgba(255, 202, 212, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid #FFCAD4;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .bounce-soft {
+            animation: bounceSoft 2s infinite;
+        }
+        @keyframes bounceSoft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+    </style>
+</head>
+<body class="text-slate-700 font-body antialiased flex flex-col min-h-screen">
+
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b-2 border-pinkBorder shadow-sm text-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer group" onclick="scrollToSection('hero')">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-pastelPeach via-pastelSoft to-pastelLight flex items-center justify-center text-pastelPlum font-bold text-xl shadow-md group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-heart text-pink-500"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold font-sans tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-pastelDeep to-pastelPlum">AMAZING THAILAND 💖</span>
+                        <p class="text-xs text-pastelDeep/80 font-medium tracking-wider">1 ภาค 1 จังหวัด ไม่ไปไม่รู้ ✨</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8 font-sans font-semibold text-sm">
+                    <a href="#provinces" class="text-slate-700 hover:text-pastelDeep transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-pastelPeach"></i> 6 จังหวัดไฮไลท์
+                    </a>
+                    <a href="#quiz" class="text-slate-700 hover:text-pastelDeep transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-pastelPeach"></i> จัดทริปตามสไตล์คุณ
+                    </a>
+                    <button onclick="showFavoritesModal()" class="text-slate-700 hover:text-pastelDeep transition-colors flex items-center gap-2 relative">
+                        <i class="fa-solid fa-bookmark text-pastelPeach"></i> รายการโปรด
+                        <span id="favCountBadge" class="hidden bg-pastelDeep text-white text-[11px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm">0</span>
+                    </button>
+                </nav>
+
+                <!-- Search Input -->
+                <div class="hidden lg:flex items-center relative">
+                    <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="ค้นหาจังหวัด, ที่เที่ยว..." 
+                        class="w-64 pl-10 pr-4 py-2 rounded-full text-sm bg-pastelLight/60 border-2 border-pinkBorder text-slate-800 placeholder-pastelDeep/60 focus:outline-none focus:border-pastelDeep focus:bg-white transition-all shadow-inner">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-pastelDeep text-sm"></i>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-pastelPlum hover:text-pastelDeep focus:outline-none p-2 rounded-xl bg-pastelLight/50">
+                    <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 border-b-2 border-pinkBorder px-4 pt-2 pb-6 space-y-3 font-sans shadow-lg">
+            <div class="relative mt-2 mb-4">
+                <input type="text" id="searchInputMobile" onkeyup="handleSearchMobile()" placeholder="ค้นหาจังหวัด, ที่เที่ยว..." 
+                    class="w-full pl-10 pr-4 py-2.5 rounded-2xl text-sm bg-pastelLight border-2 border-pinkBorder text-slate-800 placeholder-pastelDeep/60">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-pastelDeep"></i>
+            </div>
+            <a href="#provinces" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-pastelDeep border-b border-pastelLight font-medium"><i class="fa-solid fa-location-dot text-pastelPeach w-6"></i> 6 จังหวัดไฮไลท์</a>
+            <a href="#quiz" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-pastelDeep border-b border-pastelLight font-medium"><i class="fa-solid fa-wand-magic-sparkles text-pastelPeach w-6"></i> จัดทริปสไตล์คุณ</a>
+            <button onclick="toggleMobileMenu(); showFavoritesModal();" class="w-full text-left py-2 text-slate-700 hover:text-pastelDeep flex items-center justify-between font-medium">
+                <span><i class="fa-solid fa-bookmark text-pastelPeach w-6"></i> รายการโปรด</span>
+                <span id="favCountBadgeMobile" class="bg-pastelDeep text-white text-xs px-2.5 py-0.5 rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=2000&q=80" alt="Thailand Travel" class="w-full h-full object-cover object-center">
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center text-white space-y-8 my-12">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-pink text-pastelPlum font-sans text-sm font-bold shadow-md border border-white">
+                <i class="fa-solid fa-sparkles text-pink-500 bounce-soft"></i> โครงการท่องเที่ยวไทย 6 ภาค 6 จังหวัด
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold font-sans tracking-tight leading-tight">
+                <span class="block text-white drop-shadow-md">เปิดประสบการณ์ใหม่</span>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-pastelSoft to-pastelLight drop-shadow">"1 ภาค 1 จังหวัด ไม่ไปไม่รู้" 🌸</span>
+            </h1>
+            
+            <p class="text-base sm:text-xl text-white/95 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-sm">
+                สัมผัสเสน่ห์เมืองไทยสุดน่ารัก วัฒนธรรมอันงดงาม ธรรมชาติสุดตระการตา และรสชาติอาหารที่เป็นเอกลักษณ์ประจำ 6 ภาค
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 font-sans">
+                <a href="#provinces" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-pastelDeep via-pastelPeach to-pastelSoft text-white font-bold shadow-cute hover:scale-105 transition-all flex items-center justify-center gap-2 text-base border-2 border-white">
+                    <i class="fa-solid fa-heart"></i> เริ่มออกเดินทาง
+                </a>
+                <a href="#quiz" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/90 text-pastelPlum font-bold border-2 border-pinkBorder hover:bg-white hover:scale-105 transition-all flex items-center justify-center gap-2 text-base shadow-md">
+                    <i class="fa-solid fa-wand-magic-sparkles text-pastelDeep"></i> แนะนำทริปตามใจคุณ
+                </a>
+            </div>
+
+            <!-- Quick Region Selector Bar -->
+            <div class="pt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 max-w-4xl mx-auto">
+                <button onclick="filterRegion('north')" class="p-3 rounded-2xl glass-card hover:border-pastelDeep transition-all text-center group shadow-sm hover:scale-105">
+                    <span class="block text-xs text-pastelDeep font-bold font-sans">🌲 ภาคเหนือ</span>
+                    <span class="font-extrabold font-sans text-sm text-slate-800">เชียงใหม่</span>
+                </button>
+                <button onclick="filterRegion('isan')" class="p-3 rounded-2xl glass-card hover:border-pastelDeep transition-all text-center group shadow-sm hover:scale-105">
+                    <span class="block text-xs text-pastelDeep font-bold font-sans">🌾 ภาคอีสาน</span>
+                    <span class="font-extrabold font-sans text-sm text-slate-800">นครราชสีมา</span>
+                </button>
+                <button onclick="filterRegion('central')" class="p-3 rounded-2xl glass-card hover:border-pastelDeep transition-all text-center group shadow-sm hover:scale-105">
+                    <span class="block text-xs text-pastelDeep font-bold font-sans">🏛️ ภาคกลาง</span>
+                    <span class="font-extrabold font-sans text-sm text-slate-800">อยุธยา</span>
+                </button>
+                <button onclick="filterRegion('east')" class="p-3 rounded-2xl glass-card hover:border-pastelDeep transition-all text-center group shadow-sm hover:scale-105">
+                    <span class="block text-xs text-pastelDeep font-bold font-sans">🌊 ตะวันออก</span>
+                    <span class="font-extrabold font-sans text-sm text-slate-800">ชลบุรี</span>
+                </button>
+                <button onclick="filterRegion('west')" class="p-3 rounded-2xl glass-card hover:border-pastelDeep transition-all text-center group shadow-sm hover:scale-105">
+                    <span class="block text-xs text-pastelDeep font-bold font-sans">⛰️ ตะวันตก</span>
+                    <span class="font-extrabold font-sans text-sm text-slate-800">กาญจนบุรี</span>
+                </button>
+                <button onclick="filterRegion('south')" class="p-3 rounded-2xl glass-card hover:border-pastelDeep transition-all text-center group shadow-sm hover:scale-105">
+                    <span class="block text-xs text-pastelDeep font-bold font-sans">🏝️ ภาคใต้</span>
+                    <span class="font-extrabold font-sans text-sm text-slate-800">ภูเก็ต</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="provinces" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-4 py-1.5 rounded-full bg-pastelLight text-pastelDeep text-xs font-bold font-sans border border-pinkBorder">🎀 DESTINATIONS</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-sans text-pastelPlum mt-3 mb-3">6 ภาค 6 จังหวัดไฮไลท์ห้ามพลาด ✨</h2>
+                <div class="w-16 h-1.5 bg-gradient-to-r from-pastelSoft via-pastelPeach to-pastelDeep mx-auto rounded-full mb-4"></div>
+                <p class="text-slate-600 font-medium">คัดสรรจุดหมายปลายทางอันอบอุ่นและมีเอกลักษณ์ในแต่ละภูมิภาคของไทย</p>
+            </div>
+
+            <!-- Region Filter Buttons -->
+            <div class="flex items-center justify-start md:justify-center gap-2 overflow-x-auto pb-4 mb-10 hide-scrollbar font-sans">
+                <button onclick="filterRegion('all')" id="btn-all" class="region-btn active px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-pastelDeep text-white shadow-cute border-2 border-white">
+                    <i class="fa-solid fa-heart mr-1.5"></i> ทั้งหมด (6)
+                </button>
+                <button onclick="filterRegion('north')" id="btn-north" class="region-btn px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-white text-slate-700 hover:bg-pastelLight border-2 border-pinkBorder shadow-sm">
+                    🌲 ภาคเหนือ (เชียงใหม่)
+                </button>
+                <button onclick="filterRegion('isan')" id="btn-isan" class="region-btn px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-white text-slate-700 hover:bg-pastelLight border-2 border-pinkBorder shadow-sm">
+                    🌾 ภาคอีสาน (โคราช)
+                </button>
+                <button onclick="filterRegion('central')" id="btn-central" class="region-btn px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-white text-slate-700 hover:bg-pastelLight border-2 border-pinkBorder shadow-sm">
+                    🏛️ ภาคกลาง (อยุธยา)
+                </button>
+                <button onclick="filterRegion('east')" id="btn-east" class="region-btn px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-white text-slate-700 hover:bg-pastelLight border-2 border-pinkBorder shadow-sm">
+                    🌊 ภาคตะวันออก (ชลบุรี)
+                </button>
+                <button onclick="filterRegion('west')" id="btn-west" class="region-btn px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-white text-slate-700 hover:bg-pastelLight border-2 border-pinkBorder shadow-sm">
+                    ⛰️ ภาคตะวันตก (กาญจนบุรี)
+                </button>
+                <button onclick="filterRegion('south')" id="btn-south" class="region-btn px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-white text-slate-700 hover:bg-pastelLight border-2 border-pinkBorder shadow-sm">
+                    🏝️ ภาคใต้ (ภูเก็ต)
+                </button>
+            </div>
+
+            <!-- Province Cards Grid -->
+            <div id="provinceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically Populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="py-20 bg-gradient-to-b from-pastelLight via-pastelSoft/40 to-pastelBg text-slate-800 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-10">
+                <span class="bg-white px-4 py-1.5 rounded-full text-pastelDeep font-sans text-xs font-bold shadow-sm border border-pinkBorder inline-block mb-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-pink-400"></i> TRAVEL QUIZ
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-sans text-pastelPlum">ค้นหาจังหวัดที่เหมาะกับไลฟ์สไตล์คุณ 🌸</h2>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base font-medium">ตอบคำถามสั้นๆ เพื่อรับคำแนะนำจุดหมายปลายทางที่ใช่ที่สุดสำหรับทริปนี้!</p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-10 rounded-3xl border-2 border-pinkBorder shadow-cute">
+                <!-- Step 1 -->
+                <div id="quizStep1" class="quiz-step space-y-6">
+                    <h3 class="text-xl font-sans font-bold text-pastelPlum text-center">1. บรรยากาศการท่องเที่ยวที่คุณหลงรักที่สุดคือแบบไหน? 💕</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-sans">
+                        <button onclick="selectQuizOption('style', 'nature')" class="p-5 rounded-2xl bg-pastelBg border-2 border-pinkBorder hover:border-pastelDeep text-left transition-all flex items-center gap-4 hover:bg-pastelLight hover:scale-102 shadow-sm">
+                            <span class="text-4xl p-2 bg-white rounded-2xl shadow-sm">🌲</span>
+                            <div>
+                                <div class="font-bold text-pastelPlum text-base">ธรรมชาติ & ขุนเขา</div>
+                                <div class="text-xs text-slate-500 mt-0.5">สูดอากาศสดชื่น ชมป่าไม้ ทะเลหมอกสุดโรแมนติก</div>
+                            </div>
+                        </button>
+                        <button onclick="selectQuizOption('style', 'sea')" class="p-5 rounded-2xl bg-pastelBg border-2 border-pinkBorder hover:border-pastelDeep text-left transition-all flex items-center gap-4 hover:bg-pastelLight hover:scale-102 shadow-sm">
+                            <span class="text-4xl p-2 bg-white rounded-2xl shadow-sm">🏝️</span>
+                            <div>
+                                <div class="font-bold text-pastelPlum text-base">ทะเล & ชายหาด</div>
+                                <div class="text-xs text-slate-500 mt-0.5">ฟังเสียงคลื่น เล่นน้ำทะเล สัมผัสเกาะสวยใสกริ๊ง</div>
+                            </div>
+                        </button>
+                        <button onclick="selectQuizOption('style', 'culture')" class="p-5 rounded-2xl bg-pastelBg border-2 border-pinkBorder hover:border-pastelDeep text-left transition-all flex items-center gap-4 hover:bg-pastelLight hover:scale-102 shadow-sm">
+                            <span class="text-4xl p-2 bg-white rounded-2xl shadow-sm">🏛️</span>
+                            <div>
+                                <div class="font-bold text-pastelPlum text-base">ประวัติศาสตร์ & วัฒนธรรม</div>
+                                <div class="text-xs text-slate-500 mt-0.5">ไหว้พระย้อนยุค สัมผัสวิถีชีวิตโบราณทรงคุณค่า</div>
+                            </div>
+                        </button>
+                        <button onclick="selectQuizOption('style', 'chill')" class="p-5 rounded-2xl bg-pastelBg border-2 border-pinkBorder hover:border-pastelDeep text-left transition-all flex items-center gap-4 hover:bg-pastelLight hover:scale-102 shadow-sm">
+                            <span class="text-4xl p-2 bg-white rounded-2xl shadow-sm">☕</span>
+                            <div>
+                                <div class="font-bold text-pastelPlum text-base">คาเฟ่ & ชิลเอาท์</div>
+                                <div class="text-xs text-slate-500 mt-0.5">ถ่ายรูปสวยๆ นั่งจิบชาเช็คอินบรรยากาศน่ารัก</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Result Container -->
+                <div id="quizResult" class="hidden text-center space-y-6">
+                    <div class="inline-block p-4 rounded-full bg-pastelLight border-2 border-pinkBorder text-4xl mb-1 bounce-soft">
+                        🎉
+                    </div>
+                    <h3 class="text-2xl font-bold font-sans text-pastelPlum">จังหวัดที่เหมาะกับทริปหวานๆ ของคุณคือ</h3>
+                    <div id="recommendedProvinceCard" class="max-w-md mx-auto"></div>
+                    <button onclick="resetQuiz()" class="px-6 py-2.5 rounded-full bg-pastelLight text-pastelDeep font-sans font-bold text-sm hover:bg-pastelSoft border border-pinkBorder transition-all">
+                        <i class="fa-solid fa-rotate-left mr-1"></i> ทำแบบทดสอบอีกครั้ง
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="detailModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div class="bg-white text-slate-800 w-full max-w-4xl rounded-3xl overflow-hidden shadow-cute relative my-8 max-h-[90vh] flex flex-col border-2 border-pinkBorder">
+            <!-- Modal Header / Cover -->
+            <div class="relative h-64 sm:h-80 w-full shrink-0">
+                <img id="modalCoverImg" class="w-full h-full object-cover" src="" alt="Province Cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-pastelPlum/90 via-pastelPlum/30 to-transparent"></div>
+                <button onclick="closeModal()" class="absolute top-4 right-4 bg-white/80 hover:bg-white text-pastelPlum rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-md transition-all shadow-md">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <span id="modalRegionBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-pastelDeep text-white font-sans inline-block mb-2 shadow-sm border border-white"></span>
+                    <h3 id="modalProvinceTitle" class="text-3xl sm:text-4xl font-extrabold font-sans text-white drop-shadow"></h3>
+                    <p id="modalSlogan" class="text-sm sm:text-base text-pastelSoft italic font-light mt-1 drop-shadow-sm"></p>
+                </div>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-8 font-body">
+                <!-- Overview -->
+                <div>
+                    <h4 class="text-lg font-bold font-sans text-pastelPlum border-l-4 border-pastelDeep pl-3 mb-2">เกี่ยวกับจังหวัด</h4>
+                    <p id="modalOverview" class="text-slate-600 leading-relaxed text-sm sm:text-base font-medium"></p>
+                </div>
+
+                <!-- Tabs for Travel, Eat, Sleep -->
+                <div class="border-b-2 border-pastelLight font-sans">
+                    <div class="flex space-x-6">
+                        <button onclick="switchModalTab('places')" id="tabBtn-places" class="tab-btn pb-3 border-b-2 border-pastelDeep font-bold text-pastelDeep flex items-center gap-2">
+                            <i class="fa-solid fa-camera text-pastelPeach"></i> สถานที่เที่ยว
+                        </button>
+                        <button onclick="switchModalTab('eat')" id="tabBtn-eat" class="tab-btn pb-3 border-b-2 border-transparent font-medium text-slate-500 hover:text-pastelDeep flex items-center gap-2">
+                            <i class="fa-solid fa-utensils text-pastelPeach"></i> กินเด็ดประจำถิ่น
+                        </button>
+                        <button onclick="switchModalTab('sleep')" id="tabBtn-sleep" class="tab-btn pb-3 border-b-2 border-transparent font-medium text-slate-500 hover:text-pastelDeep flex items-center gap-2">
+                            <i class="fa-solid fa-hotel text-pastelPeach"></i> ที่นอนบรรยากาศดี
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="tabContent-places" class="modal-tab-content grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                <div id="tabContent-eat" class="modal-tab-content hidden grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                <div id="tabContent-sleep" class="modal-tab-content hidden grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+            </div>
+            
+            <div class="p-4 bg-pastelBg border-t-2 border-pinkBorder flex justify-between items-center px-6 font-sans">
+                <button id="modalFavBtn" onclick="" class="px-5 py-2.5 rounded-full border-2 border-pinkBorder text-pastelDeep font-bold text-sm flex items-center gap-2 hover:bg-pastelLight transition-all">
+                    <i class="fa-regular fa-bookmark"></i> บันทึกรายการโปรด
+                </button>
+                <button onclick="closeModal()" class="px-6 py-2.5 rounded-full bg-pastelDeep text-white font-bold text-sm hover:bg-pastelPlum transition-all shadow-md">
+                    ปิดหน้าต่าง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="favoritesModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-xl rounded-3xl overflow-hidden shadow-cute relative my-8 max-h-[80vh] flex flex-col border-2 border-pinkBorder">
+            <div class="p-6 bg-pastelDeep text-white flex justify-between items-center">
+                <h3 class="text-xl font-bold font-sans flex items-center gap-2">
+                    <i class="fa-solid fa-heart text-pastelLight"></i> รายการโปรดของคุณ ✨
+                </h3>
+                <button onclick="closeFavoritesModal()" class="text-white/80 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div id="favoritesList" class="p-6 overflow-y-auto divide-y divide-pastelLight flex-1">
+                <!-- Dynamically Populated -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-auto bg-white border-t-2 border-pinkBorder text-slate-600 py-12 font-sans text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <span class="text-lg font-bold text-pastelPlum tracking-wide">AMAZING THAILAND 🌸</span>
+                    <p class="mt-2 text-xs text-slate-500 leading-relaxed font-medium">
+                        เว็บไซต์ประชาสัมพันธ์การท่องเที่ยวประเทศไทย ภายใต้แคมเปญ "1 ภาค 1 จังหวัด ไม่ไปไม่รู้" รวบรวมสถานที่เที่ยว ร้านอร่อย และที่พักน่ารักๆ ในสไตล์ Soft Pastel Pink
+                    </p>
+                </div>
+                <div>
+                    <h5 class="text-pastelPlum font-bold mb-3">6 จังหวัดไฮไลท์</h5>
+                    <ul class="grid grid-cols-2 gap-2 text-xs text-slate-600 font-medium">
+                        <li>🌲 เชียงใหม่ (ภาคเหนือ)</li>
+                        <li>🌾 นครราชสีมา (ภาคอีสาน)</li>
+                        <li>🏛️ อยุธยา (ภาคกลาง)</li>
+                        <li>🌊 ชลบุรี (ภาคตะวันออก)</li>
+                        <li>⛰️ กาญจนบุรี (ภาคตะวันตก)</li>
+                        <li>🏝️ ภูเก็ต (ภาคใต้)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-pastelPlum font-bold mb-3">เกี่ยวกับการจัดทำ</h5>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">
+                        พัฒนาด้วย HTML5, TailwindCSS และ JavaScript ในโทนสี Soft Pink & Creamy Pastel หวานละมุน ใช้งานง่าย สะอาดตา
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-pinkBorder text-center text-xs text-pastelDeep font-medium">
+                &copy; 2026 Amazing Thailand - 1 ภาค 1 จังหวัด ไม่ไปไม่รู้ ✨ All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Database of 6 Representative Provinces
+        const provincesData = [
+            {
+                id: 'chiangmai',
+                name: 'เชียงใหม่',
+                region: 'north',
+                regionName: 'ภาคเหนือ',
+                slogan: 'ดอยสุเทพเป็นศรี ประเพณีงดงาม บุปผาชาติต่างเมือง นครพิงค์เลื่องลือ',
+                cover: 'https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?auto=format&fit=crop&w=1200&q=80',
+                overview: 'จังหวัดเชียงใหม่ ดินแดนแห่งล้านนาที่เต็มไปด้วยเสน่ห์ของธรรมชาติ ขุนเขาหมอกหนา วัดวาอารามเก่าแก่ และวัฒนธรรมประเพณีอันทรงคุณค่า อีกทั้งยังเป็นศูนย์รวมคาเฟ่เก๋ๆ สไตล์มินิมอลและวิถีชีวิตสโลว์ไลฟ์น่ารักๆ',
+                style: 'nature',
+                places: [
+                    { name: 'วัดพระธาตุดอยสุเทพราชวรวิหาร', desc: 'ปูชนียสถานคู่บ้านคู่เมืองเชียงใหม่ มองเห็นทิวทัศน์เมืองเชียงใหม่ได้รอบทิศ', img: 'https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'ประตูท่าแพ & ถนนคนเดิน', desc: 'จุดเช็คอินยอดฮิตกลางเมือง และแหล่งช้อปปิ้งสินค้าแฮนด์เมด อาหารพื้นเมืองยามค่ำคืน', img: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=600&q=80' }
+                ],
+                eat: [
+                    { name: 'ข้าวซอยไก่แม่สาย', desc: 'ข้าวซอยรสเข้มข้น หอมกลิ่นเครื่องแกง ตำหรับเมืองเหนือแท้ๆ', img: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'ไส้อั่ว & น้ำพริกหนุ่ม ร้านดำรงค์', desc: 'ของฝากยอดฮิตประจำตลาดวโรรส (กาดหลวง)', img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80' }
+                ],
+                sleep: [
+                    { name: 'Four Seasons Resort Chiang Mai', desc: 'รีสอร์ทหรูท่ามกลางทุ่งนาและทิวเขา ณ อำเภอแม่ริม', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'โฮมสเตย์ม่อนแจ่ม', desc: 'นอนรับลมหนาว ชมทะเลหมอกและแปลงดอกไม้หลากสี', img: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80' }
+                ]
+            },
+            {
+                id: 'korat',
+                name: 'นครราชสีมา (โคราช)',
+                region: 'isan',
+                regionName: 'ภาคอีสาน',
+                slogan: 'เมืองหญิงกล้า ผ้าไหมดี หมี่โคราช ปราสาทหิน ดินด่านเกวียน',
+                cover: 'https://images.unsplash.com/photo-1629814249584-bd4d53cf0e7d?auto=format&fit=crop&w=1200&q=80',
+                overview: 'นครราชสีมา หรือ โคราช ประตูสู่อีสาน ดินแดนแห่งประวัติศาสตร์อันยาวนาน มีเอกลักษณ์ทั้งอนุสาวรีย์ย่าโม ปราสาทหินพิมาย และผืนป่าเขาใหญ่ มรดกโลกทางธรรมชาติอันอุดมสมบูรณ์และสวยงาม',
+                style: 'culture',
+                places: [
+                    { name: 'อุทยานแห่งชาติเขาใหญ่', desc: 'ผืนป่ามรดกโลก สูดอากาศบริสุทธิ์ ชมน้ำตกเหวนรอก และส่องสัตว์ยามค่ำคืน', img: 'https://images.unsplash.com/photo-1511497584788-8767611136f6?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'อุทยานประวัติศาสตร์พิมาย', desc: 'ปราสาทหินขอมที่ใหญ่ที่สุดในประเทศไทย อายุกว่าพันปี', img: 'https://images.unsplash.com/photo-1629814249584-bd4d53cf0e7d?auto=format&fit=crop&w=600&q=80' }
+                ],
+                eat: [
+                    { name: 'ผัดหมี่โคราช', desc: 'เส้นเหนียวนุ่ม ผัดซอสรสชาติเปรี้ยวหวานเผ็ดลงตัว เอกลักษณ์เฉพาะโคราช', img: 'https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'ส้มตำไก่ย่างโคราช', desc: 'ส้มตำรสแซ่บจัดจ้าน ทานคู่กับไก่ย่างวิเชียรบุรีเนื้อนุ่มหนังกรอบ', img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80' }
+                ],
+                sleep: [
+                    { name: 'Atta Lakeside Resort Suite Khao Yai', desc: 'รีสอร์ทหรูริมบึงน้ำขนาดใหญ่ บรรยากาศเงียบสงบในเขาใหญ่', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'Thames Valley Khao Yai', desc: 'ที่พักสไตล์ชนบทอังกฤษ รายล้อมด้วยสวนสวยงามน่ารัก', img: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80' }
+                ]
+            },
+            {
+                id: 'ayutthaya',
+                name: 'พระนครศรีอยุธยา',
+                region: 'central',
+                regionName: 'ภาคกลาง',
+                slogan: 'ราชธานีเก่า อู่ข้าวอู่น้ำ ถ้ำงามล้ำ คุ้มค่าวัดวาอาราม',
+                cover: 'https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=80',
+                overview: 'อดีตราชธานีอันรุ่งเรืองของไทย เมืองมรดกโลกUNESCO ที่เต็มไปด้วยร่องรอยโบราณสถานอันทรงคุณค่า โบสถ์วิหารเก่าแก่ วิถีชีวิตริมน้ำ และสายน้ำเจ้าพระยาที่สงบอบอุ่น',
+                style: 'culture',
+                places: [
+                    { name: 'วัดมหาธาตุ', desc: 'ชมความอัศจรรย์เศียรพระพุทธรูปในรากไม้ไทร โบราณสถานมรดกโลก', img: 'https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'วัดไชยวุฒนาราม', desc: 'วัดสวยริมแม่น้ำเจ้าพระยา สถาปัตยกรรมขอม ยามพระอาทิตย์ตกดินงดงามยิ่งนัก', img: 'https://images.unsplash.com/photo-1609946782701-8c4659f80168?auto=format&fit=crop&w=600&q=80' }
+                ],
+                eat: [
+                    { name: 'กุ้งแม่น้ำเผา', desc: 'กุ้งแม่น้ำตัวโต มันหัวกุ้งเยิ้มๆ ทานคู่กับน้ำจิ้มซีฟู้ดรสเด็ดริมแม่น้ำ', img: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'โรตีสายไหมแม่อารีย์', desc: 'แป้งนุ่มหอมนมอัดแน่นด้วยสายไหมหวานกำลังดี ของฝากขึ้นชื่อ', img: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80' }
+                ],
+                sleep: [
+                    { name: 'sala ayutthaya', desc: 'บูทีคโรงแรมดีไซน์เก๋ มองเห็นวิววัดพุทไธศวรรย์ฝั่งตรงข้ามแม่น้ำ', img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'อโยธยา ริเวอร์ไซด์ โฮเต็ล', desc: 'ที่พักริมแม่น้ำเจ้าพระยา ใกล้สถานีรถไฟเดินทางสะดวก', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80' }
+                ]
+            },
+            {
+                id: 'chonburi',
+                name: 'ชลบุรี',
+                region: 'east',
+                regionName: 'ภาคตะวันออก',
+                slogan: 'ทะเลงาม ข้าวหลามอร่อย อ้อยหวาน สานตระกร้า ดีดียอดง้าว',
+                cover: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+                overview: 'จังหวัดชายทะเลใกล้กรุงเทพฯ ที่ครบครันด้วยความสนุกสดใส ชายหาดพัทยา เกาะล้านอันงดงาม คาเฟ่ริมทะเลน่ารักๆ และอาหารซีฟู้ดสดๆ เหมาะสำหรับการพักผ่อนสั้นๆ ในวันหยุด',
+                style: 'sea',
+                places: [
+                    { name: 'เกาะล้าน', desc: 'เกาะสวยน้ำใสปะการังงาม ชายหาดตาแหวน และหาดแสมเดินทางง่ายใกล้กรุงเทพฯ', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'ปราสาทสัจธรรม', desc: 'สถาปัตยกรรมแกะสลักไม้ที่ใหญ่ที่สุดในโลก ตั้งเด่นริมทะเลพัทยา', img: 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=600&q=80' }
+                ],
+                eat: [
+                    { name: 'ข้าวหลามหนองมน', desc: 'ข้าวหลามกะทิหวานมัน ข้าวเหนียวนุ่มหน้าสังขยาและถั่วดำ', img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'อาหารทะเลสด ตลาดอ่างศิลา', desc: 'ปูม้านึ่ง กุ้งอบวุฒเส้น และปลาหมึกย่างพร้อมน้ำจิ้มซีฟู้ดสดใหม่', img: 'https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=600&q=80' }
+                ],
+                sleep: [
+                    { name: 'Cape Dara Resort Pattaya', desc: 'รีสอร์ทหรูติดชายหาดส่วนตัว พร้อมสระว่ายน้ำแบบ Infinity Pool วิวทะเล 180 องศา', img: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'Mason Pattaya', desc: 'พูลวิลล่าสไตล์โมเดิร์นบนเนินเขาชายหาดจอมเทียนเงียบสงบ', img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=600&q=80' }
+                ]
+            },
+            {
+                id: 'kanchanaburi',
+                name: 'กาญจนบุรี',
+                region: 'west',
+                regionName: 'ภาคตะวันตก',
+                slogan: 'แคว้นโบราณ ด่านเจดีย์ มณีเมืองกาญจน์ สะพานข้ามแม่น้ำแคว แหล่งแร่สายน้ำธรรมชาติ',
+                cover: 'https://images.unsplash.com/photo-1512553140716-c8746372865c?auto=format&fit=crop&w=1200&q=80',
+                overview: 'เมืองแห่งสายน้ำและขุนเขาทางภาคตะวันตก โดดเด่นด้วยประวัติศาสตร์ สะพานข้ามแม่น้ำแคว ทางรถไฟสายมรณะ น้ำตกมรกตเอราวัณ และที่พักแพริมน้ำบรรยากาศชิลสุดๆ',
+                style: 'nature',
+                places: [
+                    { name: 'สะพานข้ามแม่น้ำแคว & ทางรถไฟสายมรณะ', desc: 'สัญลักษณ์ประวัติศาสตร์สงครามโลกครั้งที่ 2 และเส้นทางรถไฟเลียบเลาะหน้าผาสุดตื่นตา', img: 'https://images.unsplash.com/photo-1512553140716-c8746372865c?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'น้ำตกเอราวัณ', desc: 'น้ำตกหินปูนสีเขียวมรกต 7 ชั้น สวยงามบริสุทธิ์น่าสัมผัส', img: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80' }
+                ],
+                eat: [
+                    { name: 'แกงป่าเมืองกาญจน์', desc: 'แกงป่ารสจัดจ้านใส่ไก่บ้านหรือเนื้อ หอมกลิ่นสมุนไพรสดประจำถิ่น', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'ปลาคังลวกจิ้ม', desc: 'เนื้อปลาคังสดๆ จากแม่น้ำแคว ลวกสุกกำลังดีพร้อมน้ำจิ้มเต้าเจี้ยวพริกสด', img: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80' }
+                ],
+                sleep: [
+                    { name: 'Z9 Resort', desc: 'รีสอร์ทแพลอยน้ำสไตล์มินิมอลบนเขื่อนศรีนครินทร์ วิวสวยระดับล้าน', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'The FloatHouse River Kwai', desc: 'แพที่พักสไตล์บูทีคริมแม่น้ำแควน้อย อิงแอบธรรมชาติแท้จริง', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80' }
+                ]
+            },
+            {
+                id: 'phuket',
+                name: 'ภูเก็ต',
+                region: 'south',
+                regionName: 'ภาคใต้',
+                slogan: 'ไข่มุกอันดามัน เมืองท่องเที่ยวเกาะระดับโลก มรดกสถาปัตยกรรมชิโนโปรตุกีส',
+                cover: 'https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=80',
+                overview: 'ไข่มุกแห่งอันดามัน เมืองเกาะตากอากาศระดับโลก ที่ผสมผสานชายหาดระดับสวรรค์ กิจกรรมทางน้ำ ย่านเมืองเก่าชิโนโปรตุกีสหลากสีสันน่ารัก และวัฒนธรรมอาหารบาบ๋าอันทรงเสน่ห์',
+                style: 'sea',
+                places: [
+                    { name: 'ย่านเมืองเก่าภูเก็ต (Old Phuket Town)', desc: 'เดินชมอาคารชิโนโปรตุกีสพาสเทลหลากสีสัน ถ่ายรูปสตรีทอาร์ท และร้านกาแฟน่ารักๆ', img: 'https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'แหลมพรหมเทพ', desc: 'จุดชมพระอาทิตย์ตกดินที่สวยงามและโรแมนติกที่สุดในประเทศไทย', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80' }
+                ],
+                eat: [
+                    { name: 'หมูฮ้อง & ขนมจีนน้ำยาปู', desc: 'หมูสามชั้นต้มซีอิ๊วเปื่อยละลายในปาก และขนมจีนแกงปูเนื้อแน่นเข้มข้นสไตล์ใต้', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'โอต้าว & ขนมโอเอ๋ว', desc: 'หอยทอดแป้งนุ่มสไตล์ภูเก็ต ล้างปากด้วยโอเอ๋ววุ้นถั่วเขียวหวานเย็นสดชื่น', img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80' }
+                ],
+                sleep: [
+                    { name: 'Sri Panwa Phuket', desc: 'พูลวิลล่าหรูระดับโลกบนยอดแหลมพันวา วิวพาโนรามาทะเลอันดามัน', img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=600&q=80' },
+                    { name: 'The Slate Phuket', desc: 'รีสอร์ทดีไซน์เหมืองแร่ดีบุกเก่าท่ามกลางธรรมชาติ ณ หาดในยาง', img: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80' }
+                ]
+            }
+        ];
+
+        let favorites = JSON.parse(localStorage.getItem('favProvinces')) || [];
+        let activeRegion = 'all';
+
+        function renderProvinces(data) {
+            const grid = document.getElementById('provinceGrid');
+            grid.innerHTML = '';
+
+            if (data.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-pastelDeep font-sans bg-white/80 rounded-3xl border-2 border-pinkBorder">
+                        <i class="fa-solid fa-face-frown text-4xl mb-3 text-pastelPeach"></i>
+                        <p class="text-lg font-bold">ไม่พบข้อมูลจังหวัดที่คุณค้นหา</p>
+                    </div>
+                `;
+                return;
+            }
+
+            data.forEach(p => {
+                const isFav = favorites.includes(p.id);
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl overflow-hidden shadow-cute hover:shadow-pink-glow transition-all duration-300 border-2 border-pinkBorder flex flex-col group hover:-translate-y-1.5';
+                card.innerHTML = `
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${p.cover}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-pastelPlum/80 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-white/90 text-pastelDeep text-xs px-3 py-1 rounded-full font-sans font-bold backdrop-blur-sm border border-pinkBorder shadow-sm">
+                            ${p.regionName}
+                        </span>
+                        <button onclick="toggleFavorite('${p.id}', event)" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 text-pastelDeep hover:bg-pastelDeep hover:text-white flex items-center justify-center backdrop-blur-md transition-all shadow-md">
+                            <i class="${isFav ? 'fa-solid text-pink-500' : 'fa-regular'} fa-heart"></i>
+                        </button>
+                        <div class="absolute bottom-4 left-4 right-4 text-white">
+                            <h3 class="text-2xl font-extrabold font-sans drop-shadow">${p.name}</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-xs text-pastelDeep font-semibold italic line-clamp-2">"${p.slogan}"</p>
+                        <p class="text-slate-600 text-sm line-clamp-3 leading-relaxed font-medium">${p.overview}</p>
+                        <div class="pt-3 border-t border-pastelLight flex items-center justify-between">
+                            <div class="flex items-center gap-3 text-xs text-pastelDeep font-bold">
+                                <span><i class="fa-solid fa-camera text-pastelPeach"></i> ${p.places.length} ที่เที่ยว</span>
+                                <span><i class="fa-solid fa-utensils text-pastelPeach"></i> ${p.eat.length} ร้านเด็ด</span>
+                            </div>
+                            <button onclick="openModal('${p.id}')" class="px-4 py-2 rounded-full bg-pastelDeep text-white text-xs font-sans font-bold hover:bg-pastelPlum transition-all shadow-sm flex items-center gap-1.5">
+                                สำรวจ <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            updateFavBadges();
+        }
+
+        // Filter Region Logic
+        function filterRegion(region) {
+            activeRegion = region;
+            document.querySelectorAll('.region-btn').forEach(btn => {
+                btn.className = 'region-btn px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-white text-slate-700 hover:bg-pastelLight border-2 border-pinkBorder shadow-sm';
+            });
+            const activeBtn = document.getElementById(`btn-${region}`);
+            if (activeBtn) {
+                activeBtn.className = 'region-btn active px-6 py-3 rounded-full font-bold text-sm whitespace-nowrap transition-all bg-pastelDeep text-white shadow-cute border-2 border-white';
+            }
+
+            if (region === 'all') {
+                renderProvinces(provincesData);
+            } else {
+                const filtered = provincesData.filter(p => p.region === region);
+                renderProvinces(filtered);
+            }
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            filterSearchQuery(query);
+        }
+
+        function handleSearchMobile() {
+            const query = document.getElementById('searchInputMobile').value.toLowerCase().trim();
+            filterSearchQuery(query);
+        }
+
+        function filterSearchQuery(query) {
+            if (!query) {
+                filterRegion(activeRegion);
+                return;
+            }
+            const filtered = provincesData.filter(p => {
+                const inName = p.name.toLowerCase().includes(query);
+                const inSlogan = p.slogan.toLowerCase().includes(query);
+                const inOverview = p.overview.toLowerCase().includes(query);
+                const inPlaces = p.places.some(place => place.name.toLowerCase().includes(query));
+                const inEat = p.eat.some(eat => eat.name.toLowerCase().includes(query));
+                return inName || inSlogan || inOverview || inPlaces || inEat;
+            });
+            renderProvinces(filtered);
+        }
+
+        // Favorites Logic
+        function toggleFavorite(id, event) {
+            if (event) event.stopPropagation();
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(favId => favId !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('favProvinces', JSON.stringify(favorites));
+            filterRegion(activeRegion);
+            updateFavBadges();
+        }
+
+        function updateFavBadges() {
+            const count = favorites.length;
+            const badge = document.getElementById('favCountBadge');
+            const badgeMobile = document.getElementById('favCountBadgeMobile');
+            
+            if (count > 0) {
+                badge.innerText = count;
+                badge.classList.remove('hidden');
+                badgeMobile.innerText = count;
+            } else {
+                badge.classList.add('hidden');
+                badgeMobile.innerText = '0';
+            }
+        }
+
+        function showFavoritesModal() {
+            const list = document.getElementById('favoritesList');
+            list.innerHTML = '';
+            
+            if (favorites.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-8 text-pastelDeep font-sans font-medium">
+                        <i class="fa-regular fa-heart text-3xl mb-2 text-pastelPeach"></i>
+                        <p>ยังไม่มีรายการโปรดที่บันทึกไว้ค่ะ</p>
+                    </div>
+                `;
+            } else {
+                const favProvinces = provincesData.filter(p => favorites.includes(p.id));
+                favProvinces.forEach(p => {
+                    const item = document.createElement('div');
+                    item.className = 'py-4 flex items-center justify-between font-sans';
+                    item.innerHTML = `
+                        <div class="flex items-center gap-4 cursor-pointer" onclick="closeFavoritesModal(); openModal('${p.id}');">
+                            <img src="${p.cover}" class="w-14 h-14 rounded-2xl object-cover border border-pinkBorder shadow-sm" alt="${p.name}">
+                            <div>
+                                <h4 class="font-bold text-pastelPlum">${p.name}</h4>
+                                <span class="text-xs text-pastelDeep font-medium">${p.regionName}</span>
+                            </div>
+                        </div>
+                        <button onclick="toggleFavorite('${p.id}')" class="text-pink-400 hover:text-pastelDeep text-sm p-2">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+            document.getElementById('favoritesModal').classList.remove('hidden');
+        }
+
+        function closeFavoritesModal() {
+            document.getElementById('favoritesModal').classList.add('hidden');
+        }
+
+        let currentModalProvince = null;
+
+        function openModal(id) {
+            currentModalProvince = provincesData.find(p => p.id === id);
+            if (!currentModalProvince) return;
+
+            document.getElementById('modalCoverImg').src = currentModalProvince.cover;
+            document.getElementById('modalRegionBadge').innerText = currentModalProvince.regionName;
+            document.getElementById('modalProvinceTitle').innerText = currentModalProvince.name;
+            document.getElementById('modalSlogan').innerText = `"${currentModalProvince.slogan}"`;
+            document.getElementById('modalOverview').innerText = currentModalProvince.overview;
+
+            // Render Tab Content
+            renderTabItems('places', currentModalProvince.places);
+            renderTabItems('eat', currentModalProvince.eat);
+            renderTabItems('sleep', currentModalProvince.sleep);
+
+            switchModalTab('places');
+
+            // Set Fav Button in Modal
+            const isFav = favorites.includes(currentModalProvince.id);
+            const favBtn = document.getElementById('modalFavBtn');
+            favBtn.onclick = () => {
+                toggleFavorite(currentModalProvince.id);
+                openModal(currentModalProvince.id); // Refresh modal fav state
+            };
+            favBtn.innerHTML = isFav 
+                ? `<i class="fa-solid fa-heart text-pink-500"></i> บันทึกแล้ว` 
+                : `<i class="fa-regular fa-bookmark"></i> บันทึกรายการโปรด`;
+
+            document.getElementById('detailModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function renderTabItems(tabType, items) {
+            const container = document.getElementById(`tabContent-${tabType}`);
+            container.innerHTML = '';
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-pastelBg border border-pinkBorder rounded-2xl overflow-hidden p-3 flex gap-4 items-center shadow-sm';
+                card.innerHTML = `
+                    <img src="${item.img}" class="w-20 h-20 rounded-xl object-cover shrink-0 border border-pinkBorder" alt="${item.name}">
+                    <div>
+                        <h5 class="font-bold text-pastelPlum font-sans text-sm">${item.name}</h5>
+                        <p class="text-xs text-slate-600 mt-1 line-clamp-2 font-medium">${item.desc}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function switchModalTab(tabName) {
+            document.querySelectorAll('.modal-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn pb-3 border-b-2 border-transparent font-medium text-slate-500 hover:text-pastelDeep flex items-center gap-2';
+            });
+
+            document.getElementById(`tabContent-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tabBtn-${tabName}`);
+            if (activeBtn) {
+                activeBtn.className = 'tab-btn pb-3 border-b-2 border-pastelDeep font-bold text-pastelDeep flex items-center gap-2';
+            }
+        }
+
+        function selectQuizOption(key, val) {
+            const recommended = provincesData.filter(p => p.style === val);
+            const randomProv = recommended[Math.floor(Math.random() * recommended.length)] || provincesData[0];
+
+            document.getElementById('quizStep1').classList.add('hidden');
+            const resContainer = document.getElementById('quizResult');
+            const cardBox = document.getElementById('recommendedProvinceCard');
+
+            cardBox.innerHTML = `
+                <div class="bg-pastelBg p-5 rounded-2xl border-2 border-pinkBorder text-left flex items-center gap-4 font-sans shadow-sm">
+                    <img src="${randomProv.cover}" class="w-20 h-20 rounded-2xl object-cover border border-pinkBorder" alt="${randomProv.name}">
+                    <div>
+                        <span class="text-
